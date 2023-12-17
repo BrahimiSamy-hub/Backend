@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 const productSchema = new mongoose.Schema(
   {
     name: {
@@ -14,25 +14,29 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isDrafted: {
+      type: Boolean,
+      default: false,
+    },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: 'Category',
     },
     season: {
       type: String,
-      enum: ["Summer", "Winter", "Spring", "Autumn"],
+      enum: ['Summer', 'Winter', 'Spring', 'Autumn'],
     },
     sexe: {
       type: String,
-      enum: ["Men", "Women", "Unisex"],
+      enum: ['Men', 'Women', 'Unisex'],
     },
     image1: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "File",
+      ref: 'File',
     },
     image2: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "File",
+      ref: 'File',
     },
     descriptions: [
       {
@@ -58,7 +62,9 @@ const productSchema = new mongoose.Schema(
     ],
   },
   { timestamps: true, versionKey: false }
-);
-const Product = mongoose.model("Product", productSchema);
+)
 
-module.exports = Product;
+productSchema.plugin(mongoosePaginate)
+const Product = mongoose.model('Product', productSchema)
+
+module.exports = Product
