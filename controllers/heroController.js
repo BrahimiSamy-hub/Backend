@@ -14,7 +14,7 @@ const createHero = async (req, res) => {
 };
 const getHero = async (req, res) => {
   try {
-    const hero = await Hero.findOne().populate("mainImage secondaryImage");
+    const hero = await Hero.find().populate("mainImage secondaryImage");
     if (hero) {
       const baseUrl = `${req.protocol}://${req.get("host")}/`;
       if (hero.mainImage && !hero.mainImage.url.startsWith("http")) {
