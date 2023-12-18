@@ -15,14 +15,11 @@ const createHero = async (req, res) => {
 const getHero = async (req, res) => {
   try {
     const hero = await Hero.find().populate("mainImage secondaryImage");
+    console.log(hero[0].mainImage.url);
     if (hero) {
       const baseUrl = `${req.protocol}://${req.get("host")}/`;
-      if (hero.mainImage && !hero.mainImage.url.startsWith("http")) {
-        hero.mainImage.url = baseUrl + hero.mainImage.url;
-      }
-      if (hero.secondaryImage && !hero.secondaryImage.url.startsWith("http")) {
-        hero.secondaryImage.url = baseUrl + hero.secondaryImage.url;
-      }
+      hero[0].mainImage.url = baseUrl + hero[0].mainImage.url;
+      hero[0].secondaryImage.url = baseUrl + hero[0].secondaryImage.url;
       res.status(200).json(hero);
     } else {
       res.status(404).json({ error: "No Hero found" });
