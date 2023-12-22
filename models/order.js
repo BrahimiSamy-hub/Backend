@@ -21,6 +21,9 @@ const orderSchema = new mongoose.Schema(
         },
       },
     ],
+    fullName: {
+      type: String,
+    },
     wilaya: {
       type: String,
     },

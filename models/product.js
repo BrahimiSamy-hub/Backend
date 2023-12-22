@@ -6,6 +6,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    marque: {
+      type: String,
+      required: false,
+    },
     inStock: {
       type: Boolean,
       default: true,
